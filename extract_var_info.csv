@@ -1,0 +1,199 @@
+"","var_name","var_label","var_desc"
+"1","YEAR","Census year","YEAR reports the four-digit year when the household was enumerated or included in the census, the ACS, and the PRCS.
+
+For the multi-year ACS/PRCS samples, YEAR indicates the last year of data included (e.g., 2007 for the 2005-2007 3-year ACS/PRCS; 2008 for the 2006-2008 3-year ACS/PRCS; and so on).  For the actual year of survey in these multi-year data, see MULTYEAR."
+"2","MULTYEAR","Actual year of survey, multi-year ACS/PRCS","MULTYEAR identifies the actual year of survey in multi-year ACS/PRCS samples.  
+
+For example, the 3-year ACS and PRCS data files each include cases from three single-year files.  For these multi-year samples, the YEAR variable identifies the last year of data (2007 for the 2005-2007 3-year data; 2008 for the 2006-2008 data; and so on). MULTYEAR gives the single-year sample from which the case was drawn (2005, 2006, or 2007 for the 2005-2007 3-year data; 2006, 2007, or 2008 for the 2006-2008 3-year data; and so on)."
+"3","SAMPLE","IPUMS sample identifier","SAMPLE identifies the IPUMS sample from which the case is drawn. Each sample receives a unique 6-digit code. The codes are structured as follows:
+
+
+The first four digits are the year of the census/survey. 
+
+
+
+The next two digits identify the sample within the year. 
+
+
+For most censuses, IPUMS has multiple datasets which were constructed using different sampling techniques (i.e. size/demographic of the sample population, geographic coverage level or location, or duration of the sampling period for the ACS/PRCS samples).  
+
+The availability table for each variable indicates whether that variable is available in only certain samples for a given year. For further discussion of sample differences, see ""Sample Designs."" [URL omitted from DDI.].
+
+Note: SAMPLE replaces DATANUM. Though the last two digits in SAMPLE do not correlate exactly with the now-deprecated DATANUM, the variable serves the same purpose of assigning a unique id to all cases that belong to the same dataset."
+"4","SERIAL","Household serial number","SERIAL is an identifying number unique to each household record in a given sample. All person records are assigned the same serial number as the household record that they follow. (Person records also have their own unique identifiers - see PERNUM.) A combination of SAMPLE and SERIAL provides a unique identifier for every household in the IPUMS; the combination of SAMPLE, SERIAL, and PERNUM uniquely identifies every person in the database.
+
+For 1850-1930, households that are part of a multi-household dwelling can be identified by using the DWELLING and DWSEQ variables. See ""Sample Designs"" [URL omitted from DDI.] for further discussion of sampling from within multi-household dwellings."
+"5","CBSERIAL","Original Census Bureau household serial number","CBSERIAL is the unique, original identification number assigned to each household record in a given sample by the Census Bureau. All person records are assigned the same serial number as the household record that they follow. (The original person record unique identification numbers assigned by the Census Bureau are provided by CBPERNUM.) 
+
+A combination of SAMPLE and CBSERIAL provides a unique identifier for every household in the IPUMS; the combination of SAMPLE, CBSERIAL, and CBPERNUM uniquely identifies every person in the database."
+"6","HHWT","Household weight","HHWT indicates how many households in the U.S. population are represented by a given household in an IPUMS sample. 
+
+It is generally a good idea to use HHWT when conducting a household-level analysis of any IPUMS sample. The use of HHWT is optional when analyzing one of the ""flat"" or unweighted IPUMS samples. Flat IPUMS samples include the 1% samples from 1850-1930, all samples from 1960, 1970, and 1980, the 1% unweighted samples from 1990 and 2000, the 10% 2010 sample, and any of the full count 100% census datasets. HHWT must be used to obtain nationally representative statistics for household-level analyses of any sample other than those.
+
+Users should also be sure to select one person (e.g., PERNUM = 1) to represent the entire household.
+
+For further explanation of the sample weights, see ""Sample Designs"" [URL omitted from DDI.] and ""Sample Weights"" [URL omitted from DDI.]. See also PERWT for a corresponding variable at the person level, and SLWT for a weight variable used with sample-line records in 1940 1% and 1950."
+"7","CLUSTER","Household cluster for variance estimation","CLUSTER is designed for use with STRATA in Taylor series linear approximation for correction of complex sample design characteristics. See the STRATA variable description for more details."
+"8","STATEFIP","State (FIPS code)","STATEFIP reports the state in which the household was located, using the Federal Information Processing Standards (FIPS) coding scheme, which orders the states alphabetically.
+
+In the 1980 Urban/Rural sample, STATEFIP identifies state groups that are not available in STATEICP; these state groups (codes 61-68) are only available for that particular sample. 
+
+See ""Geographic Coding and Comparability"" [URL omitted from DDI.] for more information on the geographic detail available in particular samples."
+"9","COUNTYFIP","County (FIPS code)","COUNTYFIP identifies the county where the household was enumerated, using the Federal Information Processing Standard (FIPS) coding scheme.
+
+COUNTYFIP codes are state-dependent; they must be combined with state codes (see STATEFIP or STATEICP) to distinguish counties located in different states.
+
+Like STATEFIP, COUNTYFIP facilitates merging IPUMS data with data from other sources that use FIPS codes.
+
+Many county boundaries and some county names have changed over time. IPUMS does not impose a uniform county boundary system on the data, so each county listed for a given year in IPUMS should be assumed to have the boundaries that it had in that year.
+
+FIPS codes were first instituted around the time of the 1970 census, so historical counties that were dissolved before then have no FIPS code. COUNTYICP and COUNTYNHG supply codes for the complete history of U.S. county definitions. These alternative variables both use codes based on the 3-digit FIPS scheme with a fourth digit added to distinguish historical counties.
+
+Counties are not identified in public-use microdata from 1950 onwards, so IPUMS instead identifies counties, where possible, from other low-level geographic identifiers. These include State Economic Areas (SEA) in 1950; county groups in 1970 (CNTYGP97) and 1980 (CNTYGP98); and Public Use Microdata Areas (PUMA) from 1990 onwards, including Super-PUMAs (PUMASUPR) in 2000.
+
+COUNTYFIP identifies a county if and only if:
+it was coterminous with a single SEA, county group, or PUMA; or
+it contained multiple SEAs, county groups, or PUMAs, none of which extended into other counties.
+
+Listing of counties identified:
+Identified Counties, 1950-Forward [URL omitted from DDI.]
+
+For municipios, the Puerto Rican statistical equivalent of U.S. counties, see PRCOUNTA (alphabetic version) and PRCOUNTY (numeric version)."
+"10","DENSITY","Population-weighted density of PUMA","DENSITY reports the average local population density among residents of each Public Use Microdata Area (PUMA) in persons per square mile. Specifically, DENSITY gives the population-weighted geometric mean of the population densities of census tracts in each PUMA.
+
+DENSITY uses tract population densities from the nearest decennial census. In 2000 samples, DENSITY uses 2000 census tract densities. In ACS and 2010 decennial census samples, DENSITY uses 2010 densities.
+
+DENSITY reports a population-weighted average density rather than the density of the whole PUMA (total PUMA population divided by PUMA area) because the population-weighted density better represents the typical local density among PUMA residents. For example, in a PUMA in southern Florida, most of the population may reside in dense developments near the coast, but if most of the PUMA's area is comprised of unpopulated interior wetlands, the whole PUMA's density would be much lower than the high urban density where most PUMA residents live. This PUMA's average tract density, weighted by tract populations (so each PUMA resident's local density is given equal weight), would be appropriately high, corresponding with a typical PUMA resident's local context.
+
+Using a geometric mean corresponds to measuring the average density on a logarithmic scale, which is suitable because population densities generally have a log-normal distribution (highly concentrated at the lower end of the distribution with a long positive tail). For such distributions, the geometric mean is appropriately less sensitive to large outliers, more sensitive to variations among small values, and generally closer to the median than is the arithmetic mean. In practical terms, a logarithmic scaling makes sense because a difference between densities of 10 and 100 is about as significant for the character of a place as any other factor-of-10 difference (e.g., 1,000 and 10,000), and it is clearly more significant than an equal absolute difference of 90 at high densities (e.g., 10,010 and 10,100).
+
+The specific steps to compute DENSITY are 1) multiply each tract's population by the logarithm of its density (population divided by land area), 2) sum these products for all tracts in each PUMA, 3) divide the sum for each PUMA by the total PUMA population, and 4) exponentiate the results to return to a linear scaling of population densities. (In the first step, if a PUMA boundary subdivides a tract, we use the whole tract's density, but we limit the population weight to the portion that also resides in the PUMA.)
+
+For a detailed explanation and demonstration of the DENSITY measure (as well as the METPOP00 and METPOP10 variables), see:
+Schroeder, J. and J. Pacas. (2019). Across the rural-urban universe: Two continuous indices of urbanization for U.S. census microdata (No. 2019-5). Minnesota Population Center Working Paper Series. [URL omitted from DDI.]"
+"11","METRO","Metropolitan status","METRO indicates whether the household resided within a metropolitan area and, for households in metropolitan areas, whether the household resided within or outside of a central/principal city.
+
+In many public-use microdata samples, metropolitan and central/principal-city status are not directly identified. In such cases, IPUMS derives METRO codes based on other available geographic information, e.g., county groups (CNTYGP97 and CNTYGP98) or Public Use Microdata Areas (PUMA). If a county group or PUMA lies only partially within metropolitan areas or central/principal cities, then METRO indicates that the status is ""indeterminable (mixed)."""
+"12","METPOP10","Average 2010 population of 2013 metro/micro areas in PUMA","METPOP10 reports the average 2010 population of metro/micro areas in each Public Use Microdata Area (PUMA). Where a PUMA lies entirely within a single metro area, this ""average"" is simply the metro area's population. Elsewhere, METPOP10 gives an approximation of the typical population size of the commuting systems where PUMA residents live.
+
+Specifically, METPOP10 provides the population-weighted geometric mean of the 2010 populations of core-based (metropolitan/micropolitan) statistical areas (CBSAs), using the 2013 CBSA delineations of the Office and Management and Budget (OMB). For PUMA residents who live outside of any CBSA, METPOP10 uses county populations to approximate the commuting system population. (For Virginia ""independent cities"" that lie outside of CBSAs, we combine the populations of the independent cities with the populations of their neighboring counties.)
+
+Using a geometric mean corresponds to measuring the average population on a logarithmic scale, which is suitable because CBSA and county populations generally have a log-normal distribution (highly concentrated at the lower end of the distribution with a long positive tail). For such distributions, the geometric mean is appropriately less sensitive to large outliers, more sensitive to variations among small values, and generally closer to the median than is the arithmetic mean. In practical terms, a logarithmic scaling makes sense because a difference between populations of 100,000 and 500,000 is about as significant for the character of a commuting system as any other factor-of-5 difference (e.g., 1 million and 5 million), and it is clearly more significant than an equal absolute difference of 400,000 in large commuting systems (e.g., 10.1 million and 10.5 million).
+
+The specific steps to compute METPOP10 are 1) compute the populations of all spatial intersections (i.e., overlaps) between PUMAs and counties, 2) multiply each intersection's population by the logarithm of the population of the encompassing CBSA or noncore county, 3) sum these products for all intersections in each PUMA, 4) divide the sum for each PUMA by the total PUMA population, and 4) exponentiate the results to return to a linear scaling of populations.
+
+For a detailed explanation and demonstration of the METPOP10 measure (as well as the DENSITY variable), see:
+Schroeder, J. and J. Pacas. (2019). Across the rural-urban universe: Two continuous indices of urbanization for U.S. census microdata (No. 2019-5). Minnesota Population Center Working Paper Series. [URL omitted from DDI.]"
+"13","PCTMETRO","Percent of 2010 PUMA population living in metro area","PCTMETRO reports the percentage of the 2010 population of a household's Public Use Microdata Area (PUMA) that falls within a metro area (METRO), specifically the 2013 CBSA delineations of the Office and Management and Budget (OMB)."
+"14","PUMA","Public Use Microdata Area","PUMA identifies the Public Use Microdata Area (PUMA) where the housing unit was located. In the 1990 State sample, PUMAs generally follow the boundaries of county groups, single counties, or census-defined ""places"". If these areas exceed 200,000 residents, they are divided into as many PUMAs of 100,000+ residents as possible. None of the 1990 State sample PUMAs cross state lines. For the 1990 Metro sample, PUMAs generally follow the boundaries of whole central cities, Metropolitan Statistical Areas, Primary Metropolitan Statistical Areas, or non-metropolitan places (See METAREA for definitions of these terms). If these areas exceed 200,000 residents, they are divided into as many PUMAs of 100,000+ residents as possible. 1990 Metro sample PUMAs sometimes cross state lines; when they do, STATEFIP and STATEICP codes are not available for households in those PUMAs. PUMAs in the 2000 census, 2010 census, and the 2005-onward ACS/PRCS also consist of 100,000+ residents, and they do not cross state lines.
+
+Note that PUMA is state-dependent. The codes must be read in combination with one of the STATE variables (STATEFIP or STATEICP). PUMAs are categorized by type (e.g., metropolitan, mixed metro/nonmetro, non-metropolitan) in the variable PUMATYPE. PUMA is similar to the county group variables, CNTYGP97 (1970) and CNTYGP98 (1980), and the State Economic Area variable (SEA) for 1940 and 1950.
+
+Note Regarding Multi-Year Samples: The Census Bureau redraws PUMA boundaries every 10 years based on population information gathered from the most recent decennial census. ACS samples incorporate the new PUMAs within a few years of the Decennial Census. See the comparability statement to see which PUMAs are used in each sample. In Multi-Year ACS files, PUMA boundaries depend on the original year the respondent was interviewed (see MULTYEAR). For example in the 2010-2012 3-year ACS sample, respondents from 2010 and 2011 correspond to the Census 2000 based PUMAs, while respondents from 2012 correspond to the Census 2010 based PUMAs."
+"15","STRATA","Household strata for variance estimation","STRATA is designed for use with CLUSTER in Taylor series linear approximation for correction of complex sample design characteristics.
+
+While appropriate use of the sampling weights PERWT and HHWT allow users to produce correct point estimates (such as means and proportions), many researchers believe that additional statistical techniques are also necessary to produce correct standard errors and statistical tests that account for complex sample design. 
+
+For further information on why and how to use STRATA and CLUSTER, see  Analysis and Variance Estimation with the IPUMS  [URL omitted from DDI.]. For more details on the mathematics behind this method, see  Issues Concerning the Calculation of Standard Errors Using IPUMS Data Products  [URL omitted from DDI.]."
+"16","GQ","Group quarters status","GQ classifies all housing units as falling into one of three main categories: households, group quarters, or vacant units. It also identifies fragmentary sample units for 1850-1930 (see below). In all years, the data available about a person and their co-residents depend on whether the person lives in a household or in group quarters. Households are sampled as units, meaning that everyone in the household is included in the sample, and most household-level variables are available. People living in group quarters are generally sampled as individuals; other people in their unit may or may not be included in the sample, and there is no way of linking co-residents' records to one another. If, however, a sampled person in group quarters was living with relatives, the related group was sampled for 1850-1930. Most household-level variables are not available for group quarters or for vacant units.
+
+Group quarters are largely institutions and other group living arrangements, such as rooming houses and military barracks. The definitions vary from year to year, but the pre-1940 samples have generally used a definition of group quarters that includes units with 10 or more individuals unrelated to the householder. See the comparability discussion below and ""Sample Designs"" [URL omitted from DDI.] for more details about changing definitions of group quarters.  Group-quarters types are identified in further detail by GQTYPE and GQFUNDS."
+"17","PERNUM","Person number in sample unit","PERNUM numbers all persons within each household consecutively in the order in which they appear on the original census or survey form. When combined with SAMPLE and SERIAL, PERNUM uniquely identifies each person within the IPUMS."
+"18","PERWT","Person weight","PERWT indicates how many persons in the U.S. population are represented by a given person in an IPUMS sample. 
+
+It is generally a good idea to use PERWT when conducting a person-level analysis of any IPUMS sample. The use of PERWT is optional when analyzing one of the ""flat"" or unweighted IPUMS samples. Flat IPUMS samples include the 1% samples from 1850-1930, all samples from 1960, 1970, and 1980, the 1% unweighted samples from 1990 and 2000, the 10% 2010 sample, and any of the full count 100% census datasets. PERWT must be used to obtain nationally representative statistics for person-level analyses of any sample other than those.
+
+For further explanation of the sample weights, see ""Sample Designs"" [URL omitted from DDI.] and ""Sample Weights"" [URL omitted from DDI.]. See also HHWT for a corresponding variable at the household level, and SLWT for a weight variable used with sample-line records in 1940 and 1950."
+"19","SEX","Sex","SEX reports whether the person was male or female."
+"20","AGE","Age","AGE reports the person's age in years as of the last birthday.
+
+Please see the Comparability section regarding a known Universe issue with AGE and AGEORIG which effects EMPSTAT and LABFORCE for the 2004 ACS Sample."
+"21","RACE","Race [general version]","With the exception of the 1970-1990 Puerto Rican censuses, RACE was asked of every person in all years. The concept of race has changed over the more than 150 years represented in the IPUMS. Currently, the Census Bureau and others consider race to be a sociopolitical construct, not a scientific or anthropological one. Many detailed RACE categories consist of national origin groups. Beginning in 2000, the race question changed substantially to allow respondents to report as many races as they felt necessary to describe themselves. In earlier years, only one race response was coded.
+
+IPUMS offers several variables describing the answer(s) to the race question. RACE provides the full detail given by the respondent and/or released by the Census Bureau; it is not always historically compatible (see comparability discussion below). Users primarily interested in historical compatibility should consider using RACESING, and should consult the race code relationship page, Relationship between RACE and RACESING codes [URL omitted from DDI.], for detail about how the RACE and RACESING codes are related.
+
+In addition, specific combinations of major races can be discerned using the following bivariate indicators of whether a particular race group was reported: RACAMIND, RACASIAN, RACBLK, RACOTHER, RACPACIS, and RACWHT. RACNUM indicates the total number of major race groups reported for an individual. The information contained in the bivariate indicators and in RACNUM is integrated into the detailed version of RACE. Users primarily interested in historical comparability should consider using RACESING and/or the accompanying variables PROBAI, PROBAPI, PROBBLK, PROBOTH, and PROBWHT.  Note that Hispanic origin is assessed through separate questioning (see HISPAN).
+
+Prior to 1960, the census enumerator was responsible for categorizing persons and was not specifically instructed to ask the individual his or her race. In 1970 and later years, an individual's race was reported by someone in the household or group quarters. In the 1990 U.S. census, the 2000 U.S. and Puerto Rican censuses, the ACS, and the PRCS respondents were specifically asked what race the person ""considers himself/herself"" to be, although such self-description was more or less operative since 1960.
+
+User Note: Race questions were not asked in the Puerto Rican censuses of 1970, 1980, and 1990.  They were asked in the 1910 and 1920 Puerto Rican censuses, the 2000-2010 Puerto Rican censuses, and the PRCS."
+"22","RACED","Race [detailed version]","With the exception of the 1970-1990 Puerto Rican censuses, RACE was asked of every person in all years. The concept of race has changed over the more than 150 years represented in the IPUMS. Currently, the Census Bureau and others consider race to be a sociopolitical construct, not a scientific or anthropological one. Many detailed RACE categories consist of national origin groups. Beginning in 2000, the race question changed substantially to allow respondents to report as many races as they felt necessary to describe themselves. In earlier years, only one race response was coded.
+
+IPUMS offers several variables describing the answer(s) to the race question. RACE provides the full detail given by the respondent and/or released by the Census Bureau; it is not always historically compatible (see comparability discussion below). Users primarily interested in historical compatibility should consider using RACESING, and should consult the race code relationship page, Relationship between RACE and RACESING codes [URL omitted from DDI.], for detail about how the RACE and RACESING codes are related.
+
+In addition, specific combinations of major races can be discerned using the following bivariate indicators of whether a particular race group was reported: RACAMIND, RACASIAN, RACBLK, RACOTHER, RACPACIS, and RACWHT. RACNUM indicates the total number of major race groups reported for an individual. The information contained in the bivariate indicators and in RACNUM is integrated into the detailed version of RACE. Users primarily interested in historical comparability should consider using RACESING and/or the accompanying variables PROBAI, PROBAPI, PROBBLK, PROBOTH, and PROBWHT.  Note that Hispanic origin is assessed through separate questioning (see HISPAN).
+
+Prior to 1960, the census enumerator was responsible for categorizing persons and was not specifically instructed to ask the individual his or her race. In 1970 and later years, an individual's race was reported by someone in the household or group quarters. In the 1990 U.S. census, the 2000 U.S. and Puerto Rican censuses, the ACS, and the PRCS respondents were specifically asked what race the person ""considers himself/herself"" to be, although such self-description was more or less operative since 1960.
+
+User Note: Race questions were not asked in the Puerto Rican censuses of 1970, 1980, and 1990.  They were asked in the 1910 and 1920 Puerto Rican censuses, the 2000-2010 Puerto Rican censuses, and the PRCS."
+"23","EDUC","Educational attainment [general version]","EDUC indicates respondents' educational attainment, as measured by the highest year of school or degree completed. Note that completion differs from the highest year of school attendance; for example, respondents who attended 10th grade but did not finish were classified in EDUC as having completed 9th grade. For additional detail on grade attendance, see GRADEATT as well as the detailed version of HIGRADE."
+"24","EDUCD","Educational attainment [detailed version]","EDUC indicates respondents' educational attainment, as measured by the highest year of school or degree completed. Note that completion differs from the highest year of school attendance; for example, respondents who attended 10th grade but did not finish were classified in EDUC as having completed 9th grade. For additional detail on grade attendance, see GRADEATT as well as the detailed version of HIGRADE."
+"25","DEGFIELD","Field of degree [general version]","DEGFIELD reports the field in which the person received a Bachelor's degree, if the person holds a Bachelor's degree."
+"26","DEGFIELDD","Field of degree [detailed version]","DEGFIELD reports the field in which the person received a Bachelor's degree, if the person holds a Bachelor's degree."
+"27","DEGFIELD2","Field of degree (2) [general version]","DEGFIELD2 reports the second field in which the person received a Bachelor's degree, if the person holds a Bachelor's degree in a second field."
+"28","DEGFIELD2D","Field of degree (2) [detailed version]","DEGFIELD2 reports the second field in which the person received a Bachelor's degree, if the person holds a Bachelor's degree in a second field."
+"29","OCC2010","Occupation, 2010 basis","OCC2010 is a harmonized occupation coding scheme based on the Census Bureau's 2010 ACS occupation classification scheme.  Similar variables are offered for the 1950 (OCC1950) and 1990 (OCC1990) classifications. OCC2010 offers researchers a consistent, long-term classification of occupations.    
+
+The Census Bureau has reorganized its occupational classification system in almost every census administered since 1850.  All original occupational information is stored in the OCC variable.  The meaning of codes in the OCC variable changes with each census year.  The 2010 occupation coding scheme [URL omitted from DDI.] for OCC has 493 categories.  In the interest of harmonization, however, the scheme has been modified to achieve the most consistent categories across time.  That is, some categories that provide more detail in the 2010 scheme were grouped together because earlier categories are inseparable when more than one occupation is coded together.  For users who wish to further aggregate occupation to broader categories, the 2010 scheme is generally organized by the following groups:
+
+Management, Business, Science, and Arts = 10-430
+Business Operations Specialists = 500-730
+Financial Specialists = 800-950
+Computer and Mathematical = 1000-1240
+Architecture and Engineering = 1300-1540
+Technicians = 1550-1560
+Life, Physical, and Social Science = 1600-1980
+Community and Social Services = 2000-2060
+Legal = 2100-2150
+Education, Training, and Library = 2200-2550
+Arts, Design, Entertainment, Sports, and Media = 2600-2920
+Healthcare Practitioners and Technicians = 3000-3540
+Healthcare Support = 3600-3650
+Protective Service = 3700-3950
+Food Preparation and Serving = 4000-4150
+Building and Grounds Cleaning and Maintenance = 4200-4250
+Personal Care and Service = 4300-4650
+Sales and Related = 4700-4965
+Office and Administrative Support = 5000-5940
+Farming, Fishing, and Forestry = 6005-6130
+Construction = 6200-6765
+Extraction = 6800-6940
+Installation, Maintenance, and Repair = 7000-7630
+Production = 7700-8965
+Transportation and Material Moving = 9000-9750
+Military Specific = 9800-9830
+Unemployed (no occupation for 5+ years) or Never Worked = 9920
+
+We followed a process of constructing and testing OCC2010 that is similar to OCC1990's process, which is discussed in more detail in this BLS working paper [URL omitted from DDI.].
+
+OCC1990 was created using a series of technical papers published by the Census Bureau shortly after each census was administered.  These papers provide detailed analyses of how the occupational coding scheme for each census year differed from the scheme used during the previous census year.  These occupational ""crosswalks"" are based on samples of cases that are ""double coded"" into the occupational schemes of the current and previous census year.  The original Census Bureau crosswalks are available via links in ""Occupation and Industry Variables"" [URL omitted from DDI.] of the IPUMS documentation. 
+
+Using the information from the occupational crosswalks, we traced the proportion of each occupation as it broke out into more specific occupations or as it was combined with others into a more general occupation.  To take one example from the technical paper produced after the 2000 census: of persons coded as ""Gaming managers"" in 2000 (2000 code 33), the Census Bureau determined that 35% would have been coded as ""Managers, service organizations"" in 1990 (1990 code 21), while 65% would have been coded as ""Managers, food serving and lodging establishments"" (1990 code 17).  Thus, OCC1990 assigns a code of 17 to the cases in the 2000 IPUMS sample having an original 2000 OCC value of 33.  We generated the same information for every occupational code in every census year from 1950-2000. 
+
+Researchers at the Bureau of Labor Statistics (BLS) then used the resulting tables to create aggregated occupational categories that were more useful for long-term analyses.  We have performed a variety of tests to ensure that the new categories are as robust as possible over the long-term.  More specifics on their methods and a detailed comparison of OCC1950 and OCC1990 can be found in the BLS Working Paper [URL omitted from DDI.] on the topic."
+"30","IND","Industry","IND is an un-recoded variable that reports the type of industry in which the person performed an occupation, which is recorded in the variables OCC (Occupation) and OCC1950 (Occupation, 1950 basis). In census usage, ""industry"" currently refers to work setting and economic sector, as opposed to the worker's specific technical function, or ""occupation"". Prior to 1930, the occupation and industry concepts were not so clearly distinguishable from one another.
+
+Some persons work in more than one industry. Generally, the instructions asked for the industry from which the person earned the most money. Respondents not sure about this were to report the industry in which they spent the most time. For persons listing more than one industry, the samples use the first one listed. Persons not currently employed were to give their most recent industry. 
+
+Universe Note: ""New Workers"" are persons seeking employment for the first time, who had not yet secured their first job.
+
+Note Regarding Multi-Year Samples: In Multi-Year ACS files, IND codes depend on the original year the respondent was interviewed (see MULTYEAR). For example, in the 2011-2015 5-year ACS sample, respondents from 2011 and 2012 correspond to the set of IND codes used from 2008-2012 [URL omitted from DDI.], while respondents from 2013, 2014, and 2015 correspond to the set of OCC codes used from 2013-2015 [URL omitted from DDI.]."
+"31","CLASSWKR","Class of worker [general version]","CLASSWKR indicates whether respondents worked for their own enterprise(s) or for someone else as employees. Workers with multiple sources of employment were classified according to the work relationship in which they spent the most time during the reference day or week. As described below, CLASSWKR contains other related information in most years."
+"32","CLASSWKRD","Class of worker [detailed version]","CLASSWKR indicates whether respondents worked for their own enterprise(s) or for someone else as employees. Workers with multiple sources of employment were classified according to the work relationship in which they spent the most time during the reference day or week. As described below, CLASSWKR contains other related information in most years."
+"33","OCCSOC","Occupation, SOC classification","OCCSOC reports the person's primary occupation, classified according to the 1998 Standard Occupational Classification (SOC) system for 2000-2009 and according to the 2010 Standard Occupational Classification (SOC) for 2010 onward. For workers employed during the previous week, the data refer to the job at which the person worked the greatest number of hours. For persons who were unemployed or out of the labor force, the data refer to the most recent job, if it was within the previous five years.
+
+The variable OCC provides a numeric occupational classification that is nearly identical to the OCCSOC scheme. The correspondence between the OCC and OCCSOC codes in the 2000 census samples is recorded in a 2000 census crosswalk [URL omitted from DDI.]. The same correspondences are available for the ACS/PRCS samples as a 2000-2010 ACS/PRCS crosswalk [URL omitted from DDI.] and 2010-2017 ACS/PRCS crosswalk [URL omitted from DDI.]."
+"34","UHRSWORK","Usual hours worked per week","UHRSWORK reports the number of hours per week that the respondent usually worked, if the person worked during the previous year. The census inquiry relates to the previous calendar year, while the ACS and the PRCS uses the previous 12 months as the reference period."
+"35","INCWAGE","Wage and salary income","INCWAGE reports each respondent's total pre-tax wage and salary income - that is, money received as an employee - for the previous year. The censuses collected information on income received from these sources during the previous calendar year; for the ACS and the PRCS, the reference period was the past 12 months. Sources of income in INCWAGE include wages, salaries, commissions, cash bonuses, tips, and other money income received from an employer. Payments-in-kind or reimbursements for business expenses are not included. See the comparability discussion below for further information.
+
+Amounts are expressed in contemporary dollars, and users studying change over time must adjust for inflation (See INCTOT for Consumer Price Index adjustment factors). The exception is the ACS/PRCS multi-year files, where all dollar amounts have been standardized to dollars as valued in the final year of data included in the file (e.g., 2007 dollars for the 2005-2007 3-year file). Additionally, more detail may be available than exists in the original ACS samples.
+
+User Note: ACS respondents are surveyed throughout the year, and amounts do not reflect calendar year dollars. While the Census Bureau provides an adjustment factor (available in ADJUST), this is an imperfect solution. See the ACS income variables note [URL omitted from DDI.] for further details."
+"36","PWTYPE","Place of work: metropolitan status","PWTYPE indicates whether respondents who worked last week worked primarily within a metropolitan area (codes 1-4), and, if so, whether they worked within a metropolitan central/principal city (codes 1-3).
+
+A metropolitan area is a region consisting of a large urban core together with surrounding communities that have a high degree of economic and social integration with the urban core. See METAREA for more information.
+
+In cases where the metropolitan and central/principal-city status of the place of work are not directly identified in the source microdata, IPUMS derives PWTYPE codes based on other available geographic information, e.g., place-of-work county groups (PWCNTYGP) or Public Use Microdata Areas (PWPUMA and PWPUMA00). If a county group or PUMA lies only partially within a metropolitan area or central/principal city, then PWTYPE indicates that the status is ""indeterminable (mixed).""
+
+In 1980, responses to questions about place of work were coded for only half the persons included in IPUMS USA. These cases provide accurate proportional distributions but not correct absolute numbers for the general population. For correct absolute numbers, users should select cases coded as 2 in MIGSAMP and multiply by 2 as well as by PERWT."
+"37","TRANWORK","Means of transportation to work","TRANWORK reports the respondent's primary means of transportation to work on the most recent day worked (1970), or over the course of the previous week (the 1960 and 1980-2000 censuses, the ACS, and the PRCS). The primary means of transportation was that used on the most days or to cover the greatest distance."
